@@ -45,7 +45,7 @@ export const KBarResults: React.FC<KBarResultsProps> = (props) => {
       if (event.isComposing) {
         return;
       }
-      
+
       if (event.key === "ArrowUp" || (event.ctrlKey && event.key === "p")) {
         event.preventDefault();
         query.setActiveIndex((index) => {
@@ -116,7 +116,7 @@ export const KBarResults: React.FC<KBarResultsProps> = (props) => {
       if (typeof item === "string") return;
       if (item.command) {
         item.command.perform(item);
-        query.toggle();
+        if (!item.disableToggleAfterPerform) query.toggle();
       } else {
         query.setSearch("");
         query.setCurrentRootAction(item.id);

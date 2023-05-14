@@ -1,7 +1,8 @@
 {
-  "name": "kbar",
+  "name": "@farish/kbar",
   "version": "0.1.0-beta.40",
   "main": "lib/index.js",
+  "private": false,
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "rm -rf ./lib & tsc",
@@ -75,6 +76,6 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/timc1/kbar.git"
+    "url": "https://github.com/farishloy/kbar.git"
   }
 }
