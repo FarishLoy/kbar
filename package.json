@@ -1,6 +1,6 @@
 {
-  "name": "@farish/kbar",
-  "version": "0.1.0-beta.40",
+  "name": "farish-kbar",
+  "version": "0.1.1",
   "main": "lib/index.js",
   "private": false,
   "types": "lib/index.d.ts",
@@ -72,7 +72,6 @@
     "command bar",
     "search"
   ],
-  "author": "Tim Chang <timchang.tcc@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
