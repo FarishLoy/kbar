@@ -22,6 +22,8 @@ export const KBarResults: React.FC<KBarResultsProps> = (props) => {
   const activeRef = React.useRef<HTMLDivElement>(null);
   const parentRef = React.useRef(null);
 
+  const shiftDown = React.useRef(false);
+
   // store a ref to all items so we do not have to pass
   // them as a dependency when setting up event listeners.
   const itemsRef = React.useRef(props.items);
@@ -72,7 +74,7 @@ export const KBarResults: React.FC<KBarResultsProps> = (props) => {
           }
           return nextIndex;
         });
-      } else if (event.key === "Enter") {
+      } else if (event.key === "Enter" && !shiftDown.current) {
         event.preventDefault();
         // storing the active dom element in a ref prevents us from
         // having to calculate the current action to perform based
@@ -125,6 +127,28 @@ export const KBarResults: React.FC<KBarResultsProps> = (props) => {
     },
     [query, options]
   );
+
+  React.useEffect(() => {
+    const keyDownListener = (e) => {
+      if (e.key === "Shift") {
+        shiftDown.current = true;
+      }
+    };
+
+    const keyUpListener = (e) => {
+      if (e.key === "Shift") {
+        shiftDown.current = false;
+      }
+    };
+
+    window.addEventListener("keydown", keyDownListener);
+    window.addEventListener("keyup", keyUpListener);
+
+    return () => {
+      window.removeEventListener("keydown", keyDownListener);
+      window.removeEventListener("keyup", keyUpListener);
+    };
+  }, []);
 
   const pointerMoved = usePointerMovedSinceMount();
 
