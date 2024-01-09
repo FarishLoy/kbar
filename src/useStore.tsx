@@ -124,8 +124,9 @@ export function useStore(props: useStoreProps) {
       },
       options: optionsRef.current,
       subscribe: (collector, cb) => publisher.subscribe(collector, cb),
+      disabled: props?.disabled ?? false,
     } as IKBarContext;
-  }, [getState, publisher, registerActions]);
+  }, [getState, publisher, registerActions, props.disabled]);
 }
 
 class Publisher {

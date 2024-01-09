@@ -73,6 +73,7 @@ export interface KBarOptions {
 export interface KBarProviderProps {
   actions?: Action[];
   options?: KBarOptions;
+  disabled?: boolean;
 }
 
 export interface KBarState {
@@ -104,6 +105,7 @@ export interface IKBarContext {
     cb: <C>(collected: C) => void
   ) => void;
   options: KBarOptions;
+  disabled: boolean;
 }
 
 export enum VisualState {
