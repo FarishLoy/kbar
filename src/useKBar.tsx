@@ -5,6 +5,8 @@ import type { KBarOptions, KBarQuery, KBarState } from "./types";
 interface BaseKBarReturnType {
   query: KBarQuery;
   options: KBarOptions;
+  disabled: boolean; 
+
 }
 
 type useKBarReturnType<S = null> = S extends null
@@ -14,7 +16,7 @@ type useKBarReturnType<S = null> = S extends null
 export function useKBar<C = null>(
   collector?: (state: KBarState) => C
 ): useKBarReturnType<C> {
-  const { query, getState, subscribe, options } = React.useContext(KBarContext);
+  const { query, getState, subscribe, options, disabled } = React.useContext(KBarContext);
 
   const collected = React.useRef(collector?.(getState()));
   const collectorRef = React.useRef(collector);
@@ -45,5 +47,5 @@ export function useKBar<C = null>(
     };
   }, [onCollect, subscribe]);
 
-  return render;
+  return {...render, disabled};
 }

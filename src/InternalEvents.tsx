@@ -19,14 +19,15 @@ export function InternalEvents() {
  * `useToggleHandler` handles the keyboard events for toggling kbar.
  */
 function useToggleHandler() {
-  const { query, options, visualState, showing } = useKBar((state) => ({
+  const { query, options, visualState, showing, disabled } = useKBar((state) => ({
     visualState: state.visualState,
     showing: state.visualState !== VisualState.hidden,
   }));
 
   React.useEffect(() => {
+    if(disabled) return;
     const shortcut = options.toggleShortcut || "$mod+k";
-
+    
     const unsubscribe = tinykeys(window, {
       [shortcut]: (event: KeyboardEvent) => {
         if (event.defaultPrevented) return;
@@ -57,7 +58,7 @@ function useToggleHandler() {
     return () => {
       unsubscribe();
     };
-  }, [options.callbacks, options.toggleShortcut, query, showing]);
+  }, [options.callbacks, options.toggleShortcut, query, showing, disabled]);
 
   const timeoutRef = React.useRef<Timeout>();
   const runAnimateTimer = React.useCallback(
